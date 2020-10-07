@@ -1,0 +1,43 @@
+---
+title: "Modelagem Conjunta de Dados Longitudinais e de Sobrevivência"
+author: 
+- name: "Ítalo Ferreira Fernandes"
+- name: "Ruy Azevedo Cota Vasconcelos"
+date: "Universidade Federal de Minas Gerais (UFMG)"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Introdução
+
+
+## Análise longitudinal
+
+
+## Análise de sobrevivência
+
+
+## Modelo conjunto
+
+
+## Estrutura do modelo conjunto
+
+# Exemplos 
+| 
+ - QOL
+ - E1193
+ - Simulação
+
+## QOL
+
+## E1193
+ 
+## Simulação
+
+## Conclusão
+
+## Referência
+teste de ortografia fe corrigi filhou 
