@@ -12,22 +12,39 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 # Introdução
-teste
 
-## Análise longitudinal
+## Dado de tempo até o evento
+O tempo até o evento é o dado primordial da análise de sobrevivência. 
 
+Na análise de sobrevivência precisamos saber se o evento acorreu ou foi censurado e qual foi o tempo acompanhamos até esse evento.
 
-## Análise de sobrevivência
+Essa modelagem consegue returnar as taxas de riscos e a probabilidade de sobrevivência.
 
+## Dado longitudinal
+Um dado pode ser considerado longitudinal quando coletamos ele em diferentes pontos no tempo. 
+
+Por tanto, os dados longitudinais, como o número de células tumorais circulantes ou resultados de saúde, podem ser ótimos preditores para o tempo até o evento em um ensaio clínico.
+
+Neste caso, não é mais importante o tempo até o evento mas qual o valor das medidas em certo tempo.
+
+E em situações na qual o tempo até o evento é importante, assim como as medidas em cada tempo?
 
 ## Modelo conjunto
+Modelos clássicos como o modelo linear misto para dados longitudinais e o modelo de riscos proporcionais de Cox não levam em conta a dependência entre essas dois tipos de dados. 
+Então, a modelagem conjunta foi proposta com objetivo de levar em consideração essa dependência.
 
+Essa modelagem produz estimativas mais eficientes para o efeito da tratamento no tempo até o evento e para o efeito da tratamento dos marcadores longitudinais. Além de reduzir o viés da estimativa do efeito geral do tratamento.
+A melhora nas estimativas implica em um aumento de poder e uma redução da amostra para o design dos ensaios clínicos.
 
-## Estrutura do modelo conjunto
+Essas propriedades foram demonstradas no *Chen et al*, além de serem demonstradas aqui também.
+
+# Estrutura do modelo conjunto
+## Parte longitudinal
+## Parte de sobrevivência
 
 # Exemplos 
-| 
- - QOL
+## Exemplos| 
+ - Quality-of-Life (QOL)
  - E1193
  - Simulação
 
