@@ -16,14 +16,14 @@ knitr::opts_chunk$set(echo = FALSE)
 ## Dado de tempo até o evento
 O tempo até o evento é o dado primordial da análise de sobrevivência. 
 
-Na análise de sobrevivência precisamos saber se o evento acorreu ou foi censurado e qual foi o tempo acompanhamos até esse evento.
+Na análise de sobrevivência precisamos saber se o evento acorreu ou foi censurado e qual foi o tempo acompanhamos até esse evento. Além de conseguirmos comparar os pacientes com tratamento dos sem tratamento.
 
-Essa modelagem consegue returnar as taxas de riscos e a probabilidade de sobrevivência.
+Essa modelagem consegue retornar as taxas de riscos e a probabilidade de sobrevivência.
 
 ## Dado longitudinal
 Um dado pode ser considerado longitudinal quando coletamos ele em diferentes pontos no tempo. 
 
-Por tanto, os dados longitudinais, como o número de células tumorais circulantes ou resultados de saúde, podem ser ótimos preditores para o tempo até o evento em um ensaio clínico.
+Por tanto, os dados longitudinais podem ser ótimos preditores para o tempo até o evento em um ensaio clínico.
 
 Neste caso, não é mais importante o tempo até o evento mas qual o valor das medidas em certo tempo.
 
