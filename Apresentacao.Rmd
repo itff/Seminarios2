@@ -4,7 +4,10 @@ author:
 - name: "Ítalo Ferreira Fernandes"
 - name: "Ruy Azevedo Cota Vasconcelos"
 date: "Universidade Federal de Minas Gerais (UFMG)"
-output: ioslides_presentation
+output:
+  ioslides_presentation:
+    widescreen: true
+    smaller: true
 ---
 
 ```{r setup, include=FALSE}
@@ -169,7 +172,7 @@ Se $\gamma = 0$ significa que que o tratamento não interfere na mudança dos da
 
 ## _E1193_
 
-* Função de trajetória ?????
+* Função de trajetória
 
 * 
  

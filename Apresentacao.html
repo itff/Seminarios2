@@ -3133,7 +3133,7 @@ slide:not(.current) .plotly.html-widget{
 
 <body style="opacity: 0">
 
-<slides>
+<slides class="layout-widescreen">
 
   <slide class="title-slide segue nobackground">
         <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
@@ -3145,9 +3145,9 @@ slide:not(.current) .plotly.html-widget{
           </hgroup>
   </slide>
 
-<slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Introdução</h2></hgroup><article  id="introdução">
+<slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Introdução</h2></hgroup><article  class="smaller " id="introdução">
 
-</article></slide><slide class=""><hgroup><h2>Dado de tempo até o evento</h2></hgroup><article  id="dado-de-tempo-até-o-evento">
+</article></slide><slide class=""><hgroup><h2>Dado de tempo até o evento</h2></hgroup><article  class="smaller " id="dado-de-tempo-até-o-evento">
 
 <p>O tempo até o evento é o dado primordial da análise de sobrevivência.</p>
 
@@ -3155,7 +3155,7 @@ slide:not(.current) .plotly.html-widget{
 
 <p>Essa modelagem consegue retornar as taxas de riscos e a probabilidade de sobrevivência.</p>
 
-</article></slide><slide class=""><hgroup><h2>Dado longitudinal</h2></hgroup><article  id="dado-longitudinal">
+</article></slide><slide class=""><hgroup><h2>Dado longitudinal</h2></hgroup><article  class="smaller " id="dado-longitudinal">
 
 <p>Um dado pode ser considerado longitudinal quando coletamos ele em diferentes pontos no tempo.</p>
 
@@ -3165,7 +3165,7 @@ slide:not(.current) .plotly.html-widget{
 
 <p>E em situações na qual o tempo até o evento é importante, assim como as medidas em cada tempo?</p>
 
-</article></slide><slide class=""><hgroup><h2>Modelo conjunto</h2></hgroup><article  id="modelo-conjunto">
+</article></slide><slide class=""><hgroup><h2>Modelo conjunto</h2></hgroup><article  class="smaller " id="modelo-conjunto">
 
 <p>Modelos clássicos como o modelo linear misto para dados longitudinais e o modelo de riscos proporcionais de Cox não levam em conta a dependência entre essas dois tipos de dados. Então, a modelagem conjunta foi proposta com objetivo de levar em consideração essa dependência.</p>
 
@@ -3173,9 +3173,9 @@ slide:not(.current) .plotly.html-widget{
 
 <p>Essas propriedades foram demonstradas no <em>Chen et al</em>, além de serem demonstradas aqui também.</p>
 
-</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Estrutura do modelo conjunto</h2></hgroup><article  id="estrutura-do-modelo-conjunto">
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Estrutura do modelo conjunto</h2></hgroup><article  class="smaller " id="estrutura-do-modelo-conjunto">
 
-</article></slide><slide class=""><hgroup><h2>Parte longitudinal</h2></hgroup><article  id="parte-longitudinal">
+</article></slide><slide class=""><hgroup><h2>Parte longitudinal</h2></hgroup><article  class="smaller " id="parte-longitudinal">
 
 <p>O componente longitudinal consiste no modelo misto linear, que pode ser escrito como:</p>
 
@@ -3188,7 +3188,7 @@ slide:not(.current) .plotly.html-widget{
 </ul></li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section">
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller " id="section">
 
 <ul>
 <li><p>\(X_{ij} = \theta_{0i} + \theta_{1i} t_{ij} +\gamma Z_i\);</p>
@@ -3199,7 +3199,7 @@ slide:not(.current) .plotly.html-widget{
 </ul></li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-1">
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller " id="section-1">
 
 <ul>
 <li><p>\(Z_i\) é o indicador de tratamento do i-ésimo indivíduo;</p></li>
@@ -3207,7 +3207,7 @@ slide:not(.current) .plotly.html-widget{
 <li><p>\(\gamma\) indica o efeito do tratamento no processo longitudinal. Assumimos distribuição normal com média 0 e variância desconhecida.</p></li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Parte de sobrevivência</h2></hgroup><article  id="parte-de-sobrevivência">
+</article></slide><slide class=""><hgroup><h2>Parte de sobrevivência</h2></hgroup><article  class="smaller " id="parte-de-sobrevivência">
 
 <p>Enquanto o componente de sobrevivência consiste em um modelo paramêtrico, como por exemplo, o modelo exponencial.</p>
 
@@ -3224,11 +3224,11 @@ slide:not(.current) .plotly.html-widget{
 </ul></li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section-2">
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller " id="section-2">
 
 <p>Temos, então, três tipos diferentes efeitos: \(\alpha\), \(\beta\) e \(\gamma\), sendo que podemos juntar os três: \(\beta\gamma + \alpha\), para obter o efeito geral do tratamento. Nosso principal objetivo infeencial é estimar esse parâmetros, porque ele nos da informações importantes para a análise.</p>
 
-</article></slide><slide class=""><hgroup><h2>Interpretações dos efeitos</h2></hgroup><article  id="interpretações-dos-efeitos">
+</article></slide><slide class=""><hgroup><h2>Interpretações dos efeitos</h2></hgroup><article  class="smaller " id="interpretações-dos-efeitos">
 
 <p>O \(\beta = 0\) significa que a resposta longitudinal não tem associação com o tempo até o evento. Quer dizer que os dados longitudinais não alteram o risco, portanto, não precisa-se de modelo conjunto neste caso.</p>
 
@@ -3238,9 +3238,9 @@ slide:not(.current) .plotly.html-widget{
 
 <p>Se \(\gamma = 0\) significa que que o tratamento não interfere na mudança dos dados longitudinais.</p>
 
-</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Exemplos</h2></hgroup><article  id="exemplos">
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Exemplos</h2></hgroup><article  class="smaller " id="exemplos">
 
-</article></slide><slide class=""><hgroup><h2>Exemplos</h2></hgroup><article  id="exemplos-1">
+</article></slide><slide class=""><hgroup><h2>Exemplos</h2></hgroup><article  class="smaller " id="exemplos-1">
 
 <ul>
 <li>Quality-of-Life (QOL)</li>
@@ -3248,7 +3248,7 @@ slide:not(.current) .plotly.html-widget{
 <li>Simulação</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>QOL</h2></hgroup><article  id="qol">
+</article></slide><slide class=""><hgroup><h2>QOL</h2></hgroup><article  class="smaller " id="qol">
 
 <ul>
 <li><p>Caracterização da associação entre tempo até o evento e QOL atravéz modelamento conjunto.</p></li>
@@ -3259,7 +3259,7 @@ slide:not(.current) .plotly.html-widget{
 </ul></li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Análise do modelo conjunto de <em>E1193</em></h2></hgroup><article  id="análise-do-modelo-conjunto-de-e1193">
+</article></slide><slide class=""><hgroup><h2>Análise do modelo conjunto de <em>E1193</em></h2></hgroup><article  class="smaller " id="análise-do-modelo-conjunto-de-e1193">
 
 <ul>
 <li><p>Experimento em grupo E1193 - Eastern Cooperative Oncology</p></li>
@@ -3267,7 +3267,7 @@ slide:not(.current) .plotly.html-widget{
 <li><p>Estudo clínico de fase III de doxorubicin, paclitaxel e uma combinação dos dois como tratamento quemoterápico de ponta contra câncer de mama metastático.</p></li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2><em>E1193</em></h2></hgroup><article  id="e1193">
+</article></slide><slide class=""><hgroup><h2><em>E1193</em></h2></hgroup><article  class="smaller " id="e1193">
 
 <ul>
 <li><p>Pacientes que recebiam um dos dois tratamentos &ldquo;simples&rdquo; - doxorubicin ou paclitaxel apenas - trocaram para o outro agente durante o estudo.</p></li>
@@ -3276,7 +3276,7 @@ slide:not(.current) .plotly.html-widget{
 <li><p>Assim com subescalas específicas para câncer de mama.</p></li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2><em>E1193</em></h2></hgroup><article  id="e1193-1">
+</article></slide><slide class=""><hgroup><h2><em>E1193</em></h2></hgroup><article  class="smaller " id="e1193-1">
 
 <ul>
 <li><p>Pontuação máxima de 148 pontos;</p>
@@ -3291,7 +3291,7 @@ slide:not(.current) .plotly.html-widget{
 </ul></li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2><em>E1193</em></h2></hgroup><article  id="e1193-2">
+</article></slide><slide class=""><hgroup><h2><em>E1193</em></h2></hgroup><article  class="smaller " id="e1193-2">
 
 <ul>
 <li><p>252 pacientes tiveram pelo menos uma medição de QOL realizada.</p></li>
@@ -3309,7 +3309,7 @@ slide:not(.current) .plotly.html-widget{
 </ul></li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2><em>E1193</em></h2></hgroup><article  id="e1193-3">
+</article></slide><slide class=""><hgroup><h2><em>E1193</em></h2></hgroup><article  class="smaller " id="e1193-3">
 
 <ul>
 <li><p>Contudo, apenas 65% dos pacientes tiveram 2 medições de QOL realizadas;</p>
@@ -3321,17 +3321,18 @@ slide:not(.current) .plotly.html-widget{
 <li><p>Essas escolhas foram feitas devido a confiança na habilidade do modelo conjunto em reduzir o viés proveniente de dados incompletos ou com erro.</p></li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2><em>E1193</em></h2></hgroup><article  id="e1193-4">
+</article></slide><slide class=""><hgroup><h2><em>E1193</em></h2></hgroup><article  class="smaller " id="e1193-4">
 
 <ul>
+<li><p>Função de trajetória</p></li>
 <li></li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Simulação</h2></hgroup><article  id="simulação">
+</article></slide><slide class=""><hgroup><h2>Simulação</h2></hgroup><article  class="smaller " id="simulação">
 
-</article></slide><slide class=""><hgroup><h2>Conclusão</h2></hgroup><article  id="conclusão">
+</article></slide><slide class=""><hgroup><h2>Conclusão</h2></hgroup><article  class="smaller " id="conclusão">
 
-</article></slide><slide class=""><hgroup><h2>Referência</h2></hgroup><article  id="referência">
+</article></slide><slide class=""><hgroup><h2>Referência</h2></hgroup><article  class="smaller " id="referência">
 
 <p>teste de ortografia fe corrigi filhou</p></article></slide>
 
