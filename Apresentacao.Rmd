@@ -55,20 +55,18 @@ O componente longitudinal consiste no modelo misto linear, que pode ser escrito 
   * $Y_{ij}$ é a resposta observada do i-ésimo indivíduo no tempo j-ésimo;
   
   * $\epsilon_{ij}$ é o erro aleatório que assumimos que vem de uma distribuição normal;
+  
+  * $X_{ij}$ é conhecida como função trajetória do modelo;
 
 ##
 
 * $X_{ij} = \theta_{0i} + \theta_{1i} t_{ij} +\gamma Z_i$;
-
-  * $X_{ij}$ é conhecida como função trajetória do modelo;
-  
-  * $t_{ij}$ é o tempo?;
-
-##
+ 
+  * $t_{ij}$ é o valor do tempo;
 
   * $Z_i$ é o indicador de tratamento do i-ésimo indivíduo;
   
-  * $\theta_{0i}$ e $\theta_{1i}$ assumimos serem aleatórios com distribuição normal multivariada.
+  * $\theta_{0i}$ e $\theta_{1i}$ são parâmetros que assumimos como aleatório e com distribuição normal multivariada.
   
   * $\gamma$ indica o efeito do tratamento no processo longitudinal. Assumimos distribuição normal com média 0 e variância desconhecida.
 
@@ -80,17 +78,19 @@ Portanto, escrevemos a função de risco do modelo de sobrevivência como:
 
 * $h(t) = h_o(t)exp(\beta X_{ij}+\alpha Z_i)$;
 
-  * $h(t)$ é a probabilidade do evento ocorrer no tempo t;
+  * $h(t)$ é a probabilidade do evento ocorrer até o tempo t (função de risco);
   
-  * $h_o(t)$ é ?
+  * $h_o(t)$ é a função de risco inicial, no tempo 0.
   
-  * $\alpha$ é o efeito do tratamento no tempo até o avento;
+  * $\alpha$ é o efeito do tratamento no tempo até o evento;
   
   * $\beta$ é o efeito do processo longitudinal na análise de sobrevivência.
 
 ## 
 
-Temos, então, três tipos diferentes efeitos: \(\alpha\), \(\beta\) e \(\gamma\), sendo que podemos juntar os três: $\beta\gamma + \alpha$, para obter o efeito geral do tratamento. Nosso principal objetivo infeencial é estimar esse parâmetros, porque ele nos da informações importantes para a análise.
+Temos, então, três tipos diferentes efeitos: \(\alpha\), \(\beta\) e \(\gamma\), sendo que podemos juntar os três: $\beta\gamma + \alpha$, para obter o efeito geral do tratamento. 
+
+Nosso principal objetivo inferencial é estimar esses parâmetros, porque ele nos da informações importantes para a análise.
 
 ## Interpretações dos efeitos
 O $\beta = 0$ significa que a resposta longitudinal não tem associação com o tempo até o evento. Quer dizer que os dados longitudinais não alteram o risco, portanto, não precisa-se de modelo conjunto neste caso. 
