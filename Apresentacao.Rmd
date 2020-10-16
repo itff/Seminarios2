@@ -1,8 +1,8 @@
 ---
 title: "Modelagem Conjunta de Dados Longitudinais e de Sobrevivência"
 author: 
-- name: "Ítalo Ferreira Fernandes"
-- name: "Ruy Azevedo Cota Vasconcelos"
+- Ítalo Ferreira Fernandes
+- Ruy Azevedo Cota Vasconcelos
 date: "Universidade Federal de Minas Gerais (UFMG)"
 output:
   ioslides_presentation:
