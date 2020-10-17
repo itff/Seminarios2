@@ -10,15 +10,30 @@ output:
     smaller: true
 ---
 
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
+
+```{r, echo=FALSE}
+library(knitr)
+```
+
+
+```{r, echo=FALSE}
+caminho_img <- function(figura) paste0(getwd(),"/figuras/",figura)
+```
+
 
 # Introdução
 
 ## Dado de tempo até o evento
 
 O tempo até o evento é o dado primordial da análise de sobrevivência. 
+
+<div class="notes">
+Just another note.
+</div>
 
 Na análise de sobrevivência precisamos saber se o evento acorreu ou foi censurado e qual foi o tempo acompanhamos até esse evento. Além de conseguirmos comparar os pacientes com tratamento dos sem tratamento.
 
@@ -103,15 +118,15 @@ Se $\gamma = 0$ significa que que o tratamento não interfere na mudança dos da
 
 # Exemplos 
 ## Exemplos| 
- - Quality-of-Life (QOL)
+ - Quality-of-Life (QDV)
  - E1193
  - Simulação
 
-## QOL
+## QDV
 
-* Caracterização da associação entre tempo até o evento e QOL atravéz modelamento conjunto.
+* Caracterização da associação entre tempo até o evento e QDV atravéz modelamento conjunto.
 
-* Entender a troca entre QOL e sobrevivência.
+* Entender a troca entre QDV e sobrevivência.
 
   * Uma certo tratamento pode prolongar a sobrevivência, mas a qualidade de vida nesse período prolongado pode ser ruim.
 
@@ -119,7 +134,7 @@ Se $\gamma = 0$ significa que que o tratamento não interfere na mudança dos da
 
 * Experimento em grupo E1193 - Eastern Cooperative Oncology
 
-* Examinar a associação entre QOL e tempo de sobrevivência médio para pacientes no estudo.
+* Examinar a associação entre QDV e tempo de sobrevivência médio para pacientes no estudo.
 
 * Estudo clínico de fase III de doxorubicin, paclitaxel e uma combinação dos dois como tratamento quemoterápico de ponta contra câncer de mama metastático.
 
@@ -127,7 +142,7 @@ Se $\gamma = 0$ significa que que o tratamento não interfere na mudança dos da
 
 * Pacientes que recebiam um dos dois tratamentos "simples" - doxorubicin ou paclitaxel apenas - trocaram para o outro agente durante o estudo.
 
-* QOL foi acessada por uma escala de avaliação de terapia de câncer de mama. (Brady et al)
+* QDV foi acessada por uma escala de avaliação de terapia de câncer de mama. (Brady et al)
 
 * Essa avaliação inclui cinco subescalas gerais - Física, social, relacionamento com o médico, emocional e funcional.
 
@@ -139,13 +154,13 @@ Se $\gamma = 0$ significa que que o tratamento não interfere na mudança dos da
 
   * Quanto maior a pontuação, melhor a qualidade de vida do paciente.
   
-* Análise do tempo de sobrevivência após entrar na fase de cross-over (progressão da doença) e associação entre tratamento e QOL;
+* Análise do tempo de sobrevivência após entrar na fase de cross-over (progressão da doença) e associação entre tratamento e QDV;
 
-  * QOL medida em 2 pontos durante essa fase.
+  * QDV medida em 2 pontos durante essa fase.
   
 ## _E1193_
 
-* 252 pacientes tiveram pelo menos uma medição de QOL realizada.
+* 252 pacientes tiveram pelo menos uma medição de QDV realizada.
 
 * 124 pacientes: paclitaxel \(\rightarrow\) doxorubicin;
 
@@ -162,10 +177,10 @@ Se $\gamma = 0$ significa que que o tratamento não interfere na mudança dos da
   
 ## _E1193_
 
-* Contudo, apenas 65% dos pacientes tiveram 2 medições de QOL realizadas;
+* Contudo, apenas 65% dos pacientes tiveram 2 medições de QDV realizadas;
 
-  * Esses dados faltantes podem introduzir viés na estimativa do efeito de QOL e do tratamento;
-  
+  * Esses dados faltantes podem introduzir viés na estimativa do efeito de QDV e do tratamento;
+
 * Dados discrepantes não foram excluídos;
 
 * Essas escolhas foram feitas devido a confiança na habilidade do modelo conjunto em reduzir o viés proveniente de dados incompletos ou com erro.
@@ -174,8 +189,61 @@ Se $\gamma = 0$ significa que que o tratamento não interfere na mudança dos da
 
 * Função de trajetória
 
-* 
- 
+  - Muito ruído
+  
+  - tratar como aleatórias
+  
+* Modelos
+
+  * Modelo de Cox apenas com a covariável do tratamento
+
+  * Modelo de dois estágios com as duas medidas de QDV
+
+  * Modelo conjunto para examinar o efeito do tratamento e a associação entre QDV e a sobrevivência.
+
+## _E1193_: Suposições
+
+* A trajetória de QDV é uma função linear do tempo
+  
+  - Já que temos apenas 2 medidas de QDV
+  
+* A transformação \(QDV^{\frac{1}{2}}\) é normal.
+
+* A interação entre tratamento e tempo foi testada separadamente e foi não-significativa.
+
+  - Podemos assumir que \(QDV^{\frac{1}{2}}\) segue uma trajetória da forma \(\theta_{0i} + \theta_{1i}t + \gamma Tratamento\)
+    - No modelo de dois estágios e no modelo conjunto.
+
+##
+
+```{r}
+knitr::include_graphics(caminho_img("tabela1.png"))
+```
+
+##
+
+```{r}
+knitr::include_graphics(caminho_img("tabela2.png"))
+```
+
+##
+
+```{r}
+knitr::include_graphics(caminho_img("tabela3.png"))
+```
+
+##
+
+```{r}
+knitr::include_graphics(caminho_img("figura1.png"))
+```
+
+##
+
+```{r}
+knitr::include_graphics(caminho_img("figura2.png"))
+```
+
 ## Simulação
 
 ## Conclusão
