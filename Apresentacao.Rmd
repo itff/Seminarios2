@@ -23,11 +23,6 @@ library(knitr)
 caminho_img <- function(figura) paste0(getwd(),"/figuras/",figura)
 ```
 
-##
-
-```{r fig.align="center"}
-knitr::include_graphics(caminho_img("figura1.png"))
-```
 
 # Introdução
 
@@ -50,11 +45,11 @@ Falaremos sobre o artigo 'Basic Concepts and Methods for Joint Models of Longitu
 
 ## Dado longitudinal
 
- * Coleta em diferentes pontos no tempo.
+ * Valores em diferentes pontos no tempo.
  
  * Importante o valor coletado e o tempo que foi coletado.
  
- * Podem ser otimos preditores para o tempo até o evento.
+ * Podem ser ótimos preditores para o tempo até o evento.
  
 <!-- 
 Um dado pode ser considerado longitudinal quando coletamos ele em diferentes pontos no tempo. 
@@ -98,7 +93,7 @@ O componente longitudinal consiste no modelo linear misto, que pode ser escrito 
   
   * $X_{ij}$ é conhecida como função trajetória do modelo;
 
-##
+## Função Trajetória
 
 <!--
 Esse função trajetória do modelo pode ser aberta como:... 
@@ -112,16 +107,18 @@ Esse função trajetória do modelo pode ser aberta como:...
   
   * $\theta_{0i}$ e $\theta_{1i}$ são parâmetros que assumimos como aleatório e com distribuição normal multivariada.
   
-  * $\gamma$ indica o efeito do tratamento no processo longitudinal. Assumimos distribuição normal com média 0 e variância desconhecida.
+  * $\gamma$ indica o efeito do tratamento no processo longitudinal.
 
 <!--
+Assumimos distribuição normal com média 0 e variância desconhecida para o gamma.
+
 Esse função trajetória do modelo permite termos valores em qualquer tempo, diferente dos dados longitudinais observados que temos apenas para alguns tempos. Por exemplo, se o tempo for por dia, pode ser que tenha um dia sem dado coletado, então a função vai preencer essa lacuna.
 -->
 
-## Parte de sobrevivência
+## Modelo Conjunto
 
 <!--
-O componente de sobrevivência consiste em um modelo paramêtrico, como por exemplo, o modelo exponencial ou modelo de weibull. E para fazer o modelo conjunto, adicionamos a função trajetória do componente longitudinal a função de riscos do componente de sobrevivência. Portanto, a função de risco é escrita desse forma: ...
+O componente de sobrevivência consiste em um modelo paramêtrico, como por exemplo, o modelo exponencial ou modelo de weibull. E para fazer o modelo conjunto, adicionamos a função trajetória do componente longitudinal a função de riscos do componente de sobrevivência. Portanto, o modelo conjunto é escrito desse forma: ...
 -->
 
 Função de risco do modelo de sobrevivência com o componente longitudinal:
@@ -136,7 +133,7 @@ Função de risco do modelo de sobrevivência com o componente longitudinal:
   
     * \(\beta\) é o efeito do processo longitudinal na análise de sobrevivência.
 
-## 
+## Efeitos
 
   * Três diferentes efeitos: 
   
@@ -149,10 +146,17 @@ Função de risco do modelo de sobrevivência com o componente longitudinal:
   * Efeito geral do tratamento: 
   
     * \(\beta\gamma + \alpha\).
-  
+
+
+```{r fig.align="center"}
+knitr::include_graphics(caminho_img("figura1.png"))
+```
+
   
 <!--
-Temos, então, três tipos diferentes efeitos: \(\alpha\), \(\beta\) e \(\gamma\) que já falamos anteriormente, sendo que podemos juntar os três para obter o efeito geral do tratamento: \(\beta\gamma + \alpha\).
+Temos, então, três tipos diferentes efeitos: \(\alpha\), \(\beta\) e \(\gamma\), sendo que podemos juntar os três para obter o efeito geral do tratamento: \(\beta\gamma + \alpha\).
+
+ o alpha mede o efeito do tratamento com o tempo até o evento, o beta mede o efeito do dado longitudinal com o tempo até o evento e o gamma mede o efeito do tratamentocom com o dado longitudinal. A imagem mostra essas relações, além de mostrar que a função tragetoria X(t) está relacioanda com o modelo linear para dados longitudinais.
 
 Nosso principal objetivo inferencial é estimar esses parâmetros, porque ele nos da informações importantes para a interpretação do modelo.
 -->
@@ -299,23 +303,23 @@ knitr::include_graphics(caminho_img("figura2.png"))
 
 ## _E1193_
 
-* Função de trajetória
+* Função de trajetória;
 
-  - Muito ruído
+  - Muito ruído;
   
-  - tratar como aleatórias
+  - Tratar como aleatórias.
 
 ## _E1193_: Suposições
 
-* A trajetória de QDV é uma função linear do tempo
+* A trajetória de QDV é uma função linear do tempo;
   
-  - Já que temos apenas 2 medidas de QDV
+  - Já que temos apenas 2 medidas de QDV.
   
 * A transformação \(QDV^{\frac{1}{2}}\) é normal.
 
-* A interação entre tratamento e tempo foi testada separadamente e foi não-significativa.
+* A interação entre tratamento e tempo foi testada separadamente e foi não-significativa;
 
-  - Podemos assumir que \(QDV^{\frac{1}{2}}\) segue uma trajetória da forma \(\theta_{0i} + \theta_{1i}t + \gamma Tratamento\)
+  - Podemos assumir que \(QDV^{\frac{1}{2}}\) segue uma trajetória da forma \(\theta_{0i} + \theta_{1i}t + \gamma Tratamento\);
     - No modelo de dois estágios e no modelo conjunto.
 
 
@@ -343,27 +347,27 @@ knitr::include_graphics(caminho_img("tabela1.png"))
 
 ## Simulação
 
-* 12 conjuntos de estudos de simulação com diferentes valores de \(\alpha = (0, 0.5)\), \(\beta = (0, 0.25, 0.5)\) e \(\gamma = (0, 0.5)\)
+* 12 conjuntos de estudos de simulação com diferentes valores de \(\alpha = (0, 0.5)\), \(\beta = (0, 0.25, 0.5)\) e \(\gamma = (0, 0.5)\);
 
-* Para cada combinação de parâmetros foram usadas 1000 réplicas.
+* Para cada combinação de parâmetros foram usadas 1000 réplicas;
 
   - Para cada réplica forama gerados 400 indivíduos - 200 no grupo controle e 200 no tratamento.
   
-* A trajetória longitudinal verdadeira foi simulada como \[X_{ij} = \theta_{0i} + \theta_{1i} \times t_{ij} + \gamma Z_{i}\]
+* A trajetória longitudinal verdadeira foi simulada como: \[X_{ij} = \theta_{0i} + \theta_{1i} \times t_{ij} + \gamma Z_{i},\]
 
-onde \(\theta_{0i} \sim N(0,1), \theta_1 \sim N(0, 0.5^2)\) e \(Cor(\theta_{0i},\theta_{1})=0.3\)
+onde \(\theta_{0i} \sim N(0,1), \theta_1 \sim N(0, 0.5^2)\) e \(Cor(\theta_{0i},\theta_{1})=0.3\).
 
-* Os dados longitudinais observados foram simulados de um modelo \(Y_{i}(t_{j}) = N(X_{i}(t_{j}),\sigma_{e}^{2})\) com \(\sigma_{e}^{2}=0.5^2\)
+* Os dados longitudinais observados foram simulados de um modelo \(Y_{i}(t_{j}) = N(X_{i}(t_{j}),\sigma_{e}^{2})\) com \(\sigma_{e}^{2}=0.5^2\);
 
 * O tempo para medidas longitudinais foi fixado em \(t_{j} = (0, 0.5, 1.0, 1.5, 2.0, 2.5)\) anos após a entrada do participante no estudo.
 
 ## Simulação
 
-* O tempo de sobrevivência é gerado pela equação \[h(t) = h_o(t)exp(\beta X_{ij}+\alpha Z_i),\] com \(\lambda(t)=0.25\) 
+* O tempo de sobrevivência é gerado pela equação: \[h(t) = h_o(t)exp(\beta X_{ij}+\alpha Z_i),\] com \(\lambda(t)=0.25\) 
   
   - Tempo mediano de sobrevivência = 2.77 anos.
   
-* Suposição de censura à direita uniforme
+* Suposição de censura à direita uniforme;
   
   - Tempo de _follow-up_ mínimo de 1 ano.
   
@@ -419,13 +423,13 @@ Na tabela 3 são apresentados o viés, erro padrão, intervalo de confiança 95%
 
 ## Discussões
 
-* Quando os dados longitudinais não estão associados ao tratamento \(\gamma = 0\), ignorar a informação longitudinal ainda resultará em estimativas atenuadas do efeito do tratamento.
+* Quando os dados longitudinais não estão associados ao tratamento \(\gamma = 0\), ignorar a informação longitudinal ainda resultará em estimativas atenuadas do efeito do tratamento;
 
-  - O grau de atenuação depende do grau de associação entre os dados longitudinais e os dados de sobrevivência - \(\beta\)
+  - O grau de atenuação depende do grau de associação entre os dados longitudinais e os dados de sobrevivência - \(\beta\);
   
-* A estimativa do efeito do tratamento se mantém sem viés quando não há associação entre os dados longitudinais e de sobrevivência
+* A estimativa do efeito do tratamento se mantém sem viés quando não há associação entre os dados longitudinais e de sobrevivência;
 
-* O uso do modelo conjunto no modelamento implica em correção do viés e aumento do poder para estimar o efeito direto do tratamento - \(\alpha\) e o efeito geral do tratamento \(\beta \gamma + \alpha\)
+* O uso do modelo conjunto no modelamento implica em correção do viés e aumento do poder para estimar o efeito direto do tratamento - \(\alpha\) e o efeito geral do tratamento \(\beta \gamma + \alpha\).
 
 ## Discussões
 
@@ -433,4 +437,4 @@ Na tabela 3 são apresentados o viés, erro padrão, intervalo de confiança 95%
 
 ## Referência
 
-  * Joseph G. Ibrahim, Haitao Chu and Liddy M. Chen, *Basic Concepts and Methods for Joint Models of Longitudinal and Survival Data*, Journal of Clinical Oncology, 28, 16, (2796), (2010)
+  * Joseph G. Ibrahim, Haitao Chu and Liddy M. Chen, *Basic Concepts and Methods for Joint Models of Longitudinal and Survival Data*, Journal of Clinical Oncology, 28, 16, (2796), (2010).
