@@ -165,7 +165,7 @@ Nosso principal objetivo inferencial é estimar esses parâmetros, porque ele no
 
   * \(\beta = 0\): as observações longitudinais não têm associação com o tempo até o evento;
 
-  * \(\beta = 0.5\): risco aumenta em 0.5 para cada unidade aumentada em \(X_ij\);
+  * \(\beta = 0.5\): risco aumenta em 0.5 para cada unidade aumentada em \(X_{ij}\);
 
   * \(\alpha < 0\): risco de quem recebe tratamento \(Z_i = 1\) é menor de quem não recebe \(Z_i = 0\);
 
