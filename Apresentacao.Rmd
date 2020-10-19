@@ -187,11 +187,11 @@ Agora passaremos para o Ruy monstrar alguns exemplos que podem utilizar o modelo
 
   * Modelo de Cox apenas com a covariável do tratamento;
 
-  * Modelo de dois estágios com as duas medidas de QDV
+  * Modelo de dois estágios com as duas medidas de QDV:
 
-    - Tsiatis et al, 1995.
+    - *Tsiatis et al*, 1995;
   
-    - Ajusta um modelo linear misto nos dados longitudinais
+    - Ajusta um modelo linear misto nos dados longitudinais;
     
     - Em seguida insere a função trajetória ajustada no modelo de Cox como variável tempo-dependente.
 
@@ -203,25 +203,25 @@ Agora passaremos para o Ruy monstrar alguns exemplos que podem utilizar o modelo
 
 ## Exemplos
 
- - Qualidade-de-vida (QDV)
+ - Qualidade-de-vida (QDV);
  
- - E1193
+ - E1193;
  
- - Simulação
+ - Simulação.
 
 ## QDV
 
-* Caracterização da associação entre tempo até o evento e QDV atravéz modelamento conjunto.
+* Caracterização da associação entre tempo até o evento e QDV atravéz modelamento conjunto;
 
-* Entender a troca entre QDV e sobrevivência.
+* Entender a troca entre QDV e sobrevivência;
 
   * Uma certo tratamento pode prolongar a sobrevivência, mas a qualidade de vida nesse período prolongado pode ser ruim.
 
 ## Análise do modelo conjunto de _E1193_
 
-* Experimento em grupo E1193 - Eastern Cooperative Oncology
+* Experimento em grupo E1193 - *Eastern Cooperative Oncology*;
 
-* Examinar a associação entre QDV e tempo de sobrevivência médio para pacientes no estudo.
+* Examinar a associação entre QDV e tempo de sobrevivência médio para pacientes no estudo;
 
 * Estudo clínico de fase III de doxorubicin, paclitaxel e uma combinação dos dois;
 
@@ -229,13 +229,13 @@ Agora passaremos para o Ruy monstrar alguns exemplos que podem utilizar o modelo
 
 ## _E1193_
 
-* Pacientes que recebiam um dos dois tratamentos "simples" - doxorubicin ou paclitaxel apenas - trocaram para o outro agente durante o estudo.
+* Pacientes que recebiam um dos dois tratamentos "simples" - doxorubicin ou paclitaxel apenas - trocaram para o outro agente durante o estudo;
 
-* QDV foi acessada por uma escala de avaliação de terapia de câncer de mama. (Brady et al, 1997)
+* QDV foi acessada por uma escala de avaliação de terapia de câncer de mama (*Brady et al*, 1997);
 
-  * Essa avaliação inclui cinco subescalas gerais 
+  * Essa avaliação inclui cinco subescalas gerais:
   
-    - Física,
+    - Física;
     
     - Social;
     
@@ -243,7 +243,7 @@ Agora passaremos para o Ruy monstrar alguns exemplos que podem utilizar o modelo
     
     - Emociona;
     
-    - Funcional;
+    - Funcional.
     
 
   * Além de subescalas específicas para câncer de mama.
@@ -253,7 +253,7 @@ Agora passaremos para o Ruy monstrar alguns exemplos que podem utilizar o modelo
 * Pontuação máxima de 148 pontos;
 
   * Quanto maior a pontuação, melhor a qualidade de vida do paciente.
-  
+
 * Análise do tempo de:
 
   - Sobrevivência após entrar na fase de cross-over (progressão da doença) e associação entre tratamento
@@ -283,8 +283,8 @@ Agora passaremos para o Ruy monstrar alguns exemplos que podem utilizar o modelo
 
 * Contudo, apenas 65% dos pacientes tiveram 2 medições de QDV realizadas;
 
-  * Esses dados faltantes podem introduzir viés na estimativa do efeito de QDV e do tratamento;
-
+  * Esses dados faltantes podem introduzir viés na estimativa do efeito de QDV e do tratamento.
+  
 * Dados discrepantes não foram excluídos;
 
 * Essas escolhas foram feitas devido a confiança na habilidade do modelo conjunto em reduzir o viés proveniente de dados incompletos ou com erro.
@@ -375,11 +375,11 @@ onde \(\theta_{0i} \sim N(0,1), \theta_1 \sim N(0, 0.5^2)\) e \(Cor(\theta_{0i},
 
   * Ajustaram 3 modelos:
     
-    - A: Modelo de Cox sem trajetória longitudinal;
+    - **A**: Modelo de Cox sem trajetória longitudinal;
     
-    - B: Modelo de Cox usando dado longitudinal como variável tempo-dependente;
+    - **B**: Modelo de Cox usando dado longitudinal como variável tempo-dependente;
     
-    - C: Modelo conjunto.
+    - **C**: Modelo conjunto.
 
 ## Simulação
 
@@ -425,11 +425,11 @@ Na tabela 3 são apresentados o viés, erro padrão, intervalo de confiança 95%
 
 * Quando os dados longitudinais não estão associados ao tratamento \(\gamma = 0\), ignorar a informação longitudinal ainda resultará em estimativas atenuadas do efeito do tratamento;
 
-  - O grau de atenuação depende do grau de associação entre os dados longitudinais e os dados de sobrevivência - \(\beta\);
+  - O grau de atenuação depende do grau de associação entre os dados longitudinais e os dados de sobrevivência, \(\beta\);
   
 * A estimativa do efeito do tratamento se mantém sem viés quando não há associação entre os dados longitudinais e de sobrevivência;
 
-* O uso do modelo conjunto no modelamento implica em correção do viés e aumento do poder para estimar o efeito direto do tratamento - \(\alpha\) e o efeito geral do tratamento \(\beta \gamma + \alpha\).
+* O uso do modelo conjunto no modelamento implica em correção do viés e aumento do poder para estimar o efeito direto do tratamento, \(\alpha\), e o efeito geral do tratamento: \(\beta \gamma + \alpha\).
 
 ## Discussões
 
