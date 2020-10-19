@@ -19,11 +19,15 @@ knitr::opts_chunk$set(echo = FALSE)
 library(knitr)
 ```
 
-
 ```{r, echo=FALSE}
 caminho_img <- function(figura) paste0(getwd(),"/figuras/",figura)
 ```
 
+##
+
+```{r fig.align="center"}
+knitr::include_graphics(caminho_img("figura1.png"))
+```
 
 # Introdução
 
@@ -46,7 +50,7 @@ Falaremos sobre o artigo 'Basic Concepts and Methods for Joint Models of Longitu
 
 ## Dado longitudinal
 
- * COleta em diferentes pontos no tempo.
+ * Coleta em diferentes pontos no tempo.
  
  * Importante o valor coletado e o tempo que foi coletado.
  
@@ -173,10 +177,32 @@ Se \(\gamma = 0\) significa que que o tratamento não influência na mudança do
 Agora passaremos para o Ruy monstrar alguns exemplos que podem utilizar o modelo conjunto.
 -->
 
-# Exemplos 
-## Exemplos| 
- - Quality-of-Life (QDV)
+# Exemplos
+
+## Modelos
+
+  * Modelo de Cox apenas com a covariável do tratamento;
+
+  * Modelo de dois estágios com as duas medidas de QDV
+
+    - Tsiatis et al, 1995.
+  
+    - Ajusta um modelo linear misto nos dados longitudinais
+    
+    - Em seguida insere a função trajetória ajustada no modelo de Cox como variável tempo-dependente.
+
+  * Modelo conjunto para examinar o efeito do tratamento e a associação entre QDV e a sobrevivência.
+  
+  <!--
+  Um dos primeiros modelos propostos que usam um modelo linear misto para os dados longitudinais.
+  -->
+
+## Exemplos
+
+ - Qualidade-de-vida (QDV)
+ 
  - E1193
+ 
  - Simulação
 
 ## QDV
@@ -193,17 +219,30 @@ Agora passaremos para o Ruy monstrar alguns exemplos que podem utilizar o modelo
 
 * Examinar a associação entre QDV e tempo de sobrevivência médio para pacientes no estudo.
 
-* Estudo clínico de fase III de doxorubicin, paclitaxel e uma combinação dos dois como tratamento quemoterápico de ponta contra câncer de mama metastático.
+* Estudo clínico de fase III de doxorubicin, paclitaxel e uma combinação dos dois;
+
+  - Quimioterapia contra câncer de mama metastático.
 
 ## _E1193_
 
 * Pacientes que recebiam um dos dois tratamentos "simples" - doxorubicin ou paclitaxel apenas - trocaram para o outro agente durante o estudo.
 
-* QDV foi acessada por uma escala de avaliação de terapia de câncer de mama. (Brady et al)
+* QDV foi acessada por uma escala de avaliação de terapia de câncer de mama. (Brady et al, 1997)
 
-* Essa avaliação inclui cinco subescalas gerais - Física, social, relacionamento com o médico, emocional e funcional.
+  * Essa avaliação inclui cinco subescalas gerais 
+  
+    - Física,
+    
+    - Social;
+    
+    - Relacionamento com o médico;
+    
+    - Emociona;
+    
+    - Funcional;
+    
 
-* Assim com subescalas específicas para câncer de mama.
+  * Além de subescalas específicas para câncer de mama.
 
 ## _E1193_
 
@@ -211,9 +250,13 @@ Agora passaremos para o Ruy monstrar alguns exemplos que podem utilizar o modelo
 
   * Quanto maior a pontuação, melhor a qualidade de vida do paciente.
   
-* Análise do tempo de sobrevivência após entrar na fase de cross-over (progressão da doença) e associação entre tratamento e QDV;
+* Análise do tempo de:
 
-  * QDV medida em 2 pontos durante essa fase.
+  - Sobrevivência após entrar na fase de cross-over (progressão da doença) e associação entre tratamento
+  
+  - QDV;
+
+    * Medida em 2 pontos durante essa fase.
   
 ## _E1193_
 
@@ -244,19 +287,23 @@ Agora passaremos para o Ruy monstrar alguns exemplos que podem utilizar o modelo
 
 ## _E1193_
 
+<!--
+Figure 2 shows the linear trajectory X_ij for each subject.
+We see from this plot that these trajectories typically have a lot of noise,
+and hence treating them as random is a key part of the analysis. 
+-->
+
+```{r fig.align="center"}
+knitr::include_graphics(caminho_img("figura2.png"))
+```
+
+## _E1193_
+
 * Função de trajetória
 
   - Muito ruído
   
   - tratar como aleatórias
-  
-* Modelos
-
-  * Modelo de Cox apenas com a covariável do tratamento
-
-  * Modelo de dois estágios com as duas medidas de QDV
-
-  * Modelo conjunto para examinar o efeito do tratamento e a associação entre QDV e a sobrevivência.
 
 ## _E1193_: Suposições
 
@@ -271,40 +318,119 @@ Agora passaremos para o Ruy monstrar alguns exemplos que podem utilizar o modelo
   - Podemos assumir que \(QDV^{\frac{1}{2}}\) segue uma trajetória da forma \(\theta_{0i} + \theta_{1i}t + \gamma Tratamento\)
     - No modelo de dois estágios e no modelo conjunto.
 
-##
+
+## _E1193_: Resultados
+
+<!--
+Na tabela 1, vemos que:
+
+O efeito do tratamento estimado é -0.251 (equivalente a uma taxa de falhas de 0.779) no modelo de Cox sem os dados de QDV.
+
+O efeito do tratamento estimado é de -0.261 (taxa de falhas de 0.771) no modelo de 2 estágios e -0.277 (taxa de falhas de 0.756) no modelo conjunto
+
+Esses resultados são consistentes com outros estudo de simulação realizados pelos autores. 
+
+A abordagem de modelagem conjunta dá estimativas maiores e sem viés do efeito do tratamento quando os dados longitudinais estão associados com a sobrevivência.
+
+As estimativas de beta no modelo de 2 estágios e no modelo conjunto são consistentes com as conclusões de Wulfsohn and Tsiatis, onde foram relatados um beta_hat e SE ligeiramente maiores no modelo conjunto quando comparados com os obtidos no modelo de 2 estágios.
+
+Para os dados do experimento E1193, beta_hat = -0.277 (SE = 0.071) no modelo de 2 estágios e beta_hat = -0.445 (SE = 0.118) no modelo conjunto.
+-->
 
 ```{r fig.align="center"}
 knitr::include_graphics(caminho_img("tabela1.png"))
 ```
 
-##
+## Simulação
+
+* 12 conjuntos de estudos de simulação com diferentes valores de \(\alpha = (0, 0.5)\), \(\beta = (0, 0.25, 0.5)\) e \(\gamma = (0, 0.5)\)
+
+* Para cada combinação de parâmetros foram usadas 1000 réplicas.
+
+  - Para cada réplica forama gerados 400 indivíduos - 200 no grupo controle e 200 no tratamento.
+  
+* A trajetória longitudinal verdadeira foi simulada como \[X_{ij} = \theta_{0i} + \theta_{1i} \times t_{ij} + \gamma Z_{i}\]
+
+onde \(\theta_{0i} \sim N(0,1), \theta_1 \sim N(0, 0.5^2)\) e \(Cor(\theta_{0i},\theta_{1})=0.3\)
+
+* Os dados longitudinais observados foram simulados de um modelo \(Y_{i}(t_{j}) = N(X_{i}(t_{j}),\sigma_{e}^{2})\) com \(\sigma_{e}^{2}=0.5^2\)
+
+* O tempo para medidas longitudinais foi fixado em \(t_{j} = (0, 0.5, 1.0, 1.5, 2.0, 2.5)\) anos após a entrada do participante no estudo.
+
+## Simulação
+
+* O tempo de sobrevivência é gerado pela equação \[h(t) = h_o(t)exp(\beta X_{ij}+\alpha Z_i),\] com \(\lambda(t)=0.25\) 
+  
+  - Tempo mediano de sobrevivência = 2.77 anos.
+  
+* Suposição de censura à direita uniforme
+  
+  - Tempo de _follow-up_ mínimo de 1 ano.
+  
+## Simulação
+
+  * Ajustaram 3 modelos:
+    
+    - A: Modelo de Cox sem trajetória longitudinal;
+    
+    - B: Modelo de Cox usando dado longitudinal como variável tempo-dependente;
+    
+    - C: Modelo conjunto.
+
+## Simulação
 
 ```{r fig.align="center"}
 knitr::include_graphics(caminho_img("tabela2.png"))
 ```
 
-##
+<!--
+
+Na tabela 2 são apresentados o viés, erro padrão, intervalo de confiança 95% das probabilidades de cobertura e taxa de erros tipo I e II para a estimativa do efeito do tratamento na sobrevivência - alpha -, para cada uma das 3 abordagens.
+
+- Ignorar o processo longitudinal pode resultar em viés na estimativa do efeito do tratamento na sobrevivência,
+com nível menor que 95% para o intervalo de confiança da probabilidade de cobertura.
+
+  . Quando gamma e beta são diferentes de zero sob a hipotése nula, alpha = 0.
+  . Ou quando beta é diferente de zero sob a hipótese alternativa, alpha != 0.
+ 
+ Lembrando que:
+                gamma: efeito do tratamento no processo longitudinal.
+                beta: efeito do processo longitudinal na sobrevivência.
+                alpha: efeito do tratamento na sobrevivência.
+
+
+-->
+
+
+## Simulação
 
 ```{r fig.align="center"}
 knitr::include_graphics(caminho_img("tabela3.png"))
 ```
 
-##
+<!--
 
-```{r fig.align="center"}
-knitr::include_graphics(caminho_img("figura1.png"))
-```
+Na tabela 3 são apresentados o viés, erro padrão, intervalo de confiança 95% das probabilidades de cobertura e taxa de erros tipo I e II para a estimativa do efeito do processo longitudinal na sobrevivência - beta -, para os modelos B e C.
 
-##
+- A abordagem B dá estimativas enviesadas de beta e cobertura menor que a nominal de 95% quando beta != 0
 
-```{r fig.align="center"}
-knitr::include_graphics(caminho_img("figura2.png"))
-```
+- SE padrão médio modelo B: 0.053; C: 0.042.
+-->
 
-## Simulação
+## Discussões
 
-## Conclusão
+* Quando os dados longitudinais não estão associados ao tratamento \(\gamma = 0\), ignorar a informação longitudinal ainda resultará em estimativas atenuadas do efeito do tratamento.
+
+  - O grau de atenuação depende do grau de associação entre os dados longitudinais e os dados de sobrevivência - \(\beta\)
+  
+* A estimativa do efeito do tratamento se mantém sem viés quando não há associação entre os dados longitudinais e de sobrevivência
+
+* O uso do modelo conjunto no modelamento implica em correção do viés e aumento do poder para estimar o efeito direto do tratamento - \(\alpha\) e o efeito geral do tratamento \(\beta \gamma + \alpha\)
+
+## Discussões
+
+* Quando o propósito do estudo clínico é investigar o efeito longitudinal no tempo até o evento de interesse, o modelo conjunto leva a estimativas mais eficientes e sem viés quando é ajustado o modelo de sobrevivência correto.
 
 ## Referência
 
-  * Joseph G. Ibrahim, Haitao Chu, and Liddy M. Chen: *Basic Concepts and Methods for Joint Models of Longitudinal and Survival Data.* 
+  * Joseph G. Ibrahim, Haitao Chu and Liddy M. Chen, *Basic Concepts and Methods for Joint Models of Longitudinal and Survival Data*, Journal of Clinical Oncology, 28, 16, (2796), (2010)
