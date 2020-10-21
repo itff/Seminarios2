@@ -24,23 +24,36 @@ caminho_img <- function(figura) paste0(getwd(),"/figuras/",figura)
 ```
 
 
-# Introdução
+## Artigo
+
+```{r fig.align="center"}
+knitr::include_graphics(caminho_img("figura1.png"))
+```
 
 <!-- Esse trabalho foi feito por mim, Ítalo, e pelo Ruy, e orientado pela Juliana. 
 Falaremos sobre o artigo 'Basic Concepts and Methods for Joint Models of Longitudinal and Survival Data' escrito por Joseph Ibrahim, Haitao Chu, and Liddy Chen 
 -->
 
+# Introdução
+
 ## Dado de tempo até o evento
+
+ * Acompanha paciente até o evento ou a censura.
 
  * O tempo até o evento é o dado primordial da análise de sobrevivência. 
  
  * Importante o tempo que levou para ocorrer o evento.
 
- * Comparação de pacientes.
+ * Comparação de tratamentos.
  
- * Retorna a função de riscos e razão de chances.
+ * Retorna a função de riscos, a taxa de falha e risco relativo.
 
-<!-- Na análise de sobrevivência queremos comparar o tempo até o evendo de um paciente com tratamento do paciente sem tratamento ou com um tratamento diferente, por isso o dado de tempo até o evento é muito importante aqui. Essa modelagem nos permite calcular a razão de chances que compara os grupos falando qual grupo tem uma maior chance do evento ocorrer em determinado tempo. -->
+<!-- 
+Nesse dado, temos um paciente que é acompanhado no tempo até ocorer o evento, como por exemplo a morte, ou até a censura à direita, que é quando o paciente sai do estudo ou o estudo termina e não temos todas informações até o evento, porque não observamos o evento ainda. 
+
+Esse tempo até o evento é primordial na análise de sobrevivencia, porque esse dados no modelo nos permite, comparar o tempo até o evendo de um paciente com tratamento do paciente sem tratamento ou com um tratamento diferente. Esse tratamento pode ser um remédio por exemplo.
+
+Portanto, o modelo consegue nos retornar a taxa de falha em cada grupo e com ela conseguimos calcular o risco relativo que compara os grupos falando qual grupo tem uma maior chance do evento ocorrer em determinado tempo. E com isso conseguimos saber se o grupo com tratamento sobrevive mais que o sem tratamento. -->
  
 
 ## Dado longitudinal
@@ -53,12 +66,12 @@ Falaremos sobre o artigo 'Basic Concepts and Methods for Joint Models of Longitu
  
 <!-- 
 Um dado pode ser considerado longitudinal quando coletamos ele em diferentes pontos no tempo. 
-O importante para os moelos que utilizam esses dados é o valor observado em determinado tempo e em ensaios clínicos, esses valores observados podem influenciar o dado de tempo até o evento.
+O importante para os modelos que utilizam esses dados é o valor observado em determinado tempo e em ensaios clínicos, esses valores observados podem influenciar o dado de tempo até o evento. Um exemplo, é o número de anticorpo no sangue de um paciente coletado todos os dias.
 -->
 
 ## Modelo conjunto
 
- * Modelos clássicos não levam em conta a dependência entre essas dois tipos de dados. 
+ * Modelos clássicos não levam em conta a dependência entre esses dois tipos de dados. 
 
  * A modelagem conjunta foi proposta com objetivo de levar em consideração essa dependência.
  
@@ -66,12 +79,11 @@ O importante para os moelos que utilizam esses dados é o valor observado em det
  
  * Aumento no poder e redução da amostragem.
 
- * Propriedades demonstradas no *Chen et al*, além de serem demonstradas aqui também.
 
-<!-- Então como os modelos classicos como o modelo linear misto para dados longitudinais e o modelo de riscos proporcionais de Cox para análise de sobrevivência não levam em conta a dependência entre essas dois tipos de dados, O artigo propõe uma modelagem conjunta para levar em conta essa dependência.
-Por tanto, se existir uma influência do dado longitudinal no tempo do evento, essa modelagem produzira estimativas mais eficientes para o efeito da tratamento no tempo até o evento e para o efeito da tratamento dos marcadores longitudinais. Além de reduzir o viés da estimativa do efeito geral do tratamento.
+<!-- Então como os modelos classicos como o modelo linear misto para dados longitudinais e o modelo de riscos proporcionais de Cox para análise de sobrevivência não levam em conta a dependência entre essas dois tipos de dados, O artigo, então, propõe uma modelagem conjunta para levar em conta essa dependência.
+Por tanto, o objetivo do artigo é demonstrar que, se existir uma influência do dado longitudinal no tempo do evento, essa modelagem conjunta produzira estimativas mais eficientes para o efeito da tratamento no tempo até o evento e para o efeito da tratamento dos marcadores longitudinais. Além de reduzir o viés da estimativa do efeito geral do tratamento.
 A melhora nas estimativas implica em um aumento de poder e uma redução da amostra para o design dos ensaios clínicos.
-Essas propriedades foram demonstradas no *Chen et al*, além de serem demonstradas aqui também mais a frente.
+Para demonstrar essas propriedades, mais a frente, demonstramos em um exemplo e fazemos simulações para comparar os modelos.
 -->
 
 # Estrutura do modelo conjunto
@@ -103,17 +115,12 @@ Esse função trajetória do modelo pode ser aberta como:...
  
   * $t_{ij}$ é o valor do tempo;
 
-  * $Z_i$ é o indicador de tratamento do i-ésimo indivíduo;
+  * $Z_i$ é o indicador de tratamento do i-ésimo indivíduo que assume 1 para tratamento e 0 para não tratamento ou tratamento base;
   
   * $\theta_{0i}$ e $\theta_{1i}$ são parâmetros que assumimos como aleatório e com distribuição normal multivariada.
   
   * $\gamma$ indica o efeito do tratamento no processo longitudinal.
 
-<!--
-Assumimos distribuição normal com média 0 e variância desconhecida para o gamma.
-
-Esse função trajetória do modelo permite termos valores em qualquer tempo, diferente dos dados longitudinais observados que temos apenas para alguns tempos. Por exemplo, se o tempo for por dia, pode ser que tenha um dia sem dado coletado, então a função vai preencer essa lacuna.
--->
 
 ## Modelo Conjunto
 
@@ -125,21 +132,28 @@ Função de risco do modelo de sobrevivência com o componente longitudinal:
 
   * \(h(t) = h_o(t)exp(\beta X_{ij}+\alpha Z_i)\);
     
-    * \(h(t)\) é a probabilidade do evento ocorrer até o tempo t (função de risco);
+    * \(h(t)\) é a taxa instantânea de ocorrência do evento (função de risco);
     
-    * \(h_o(t)\) é a função de risco inicial.
+    * \(h_o(t)\) é a função de risco de base.
     
     * \(\alpha\) é o efeito do tratamento no tempo até o evento;
   
-    * \(\beta\) é o efeito do processo longitudinal na análise de sobrevivência.
+    * \(\beta\) é o efeito do processo longitudinal.
 
 ## Efeitos
+<!--
+Temos, então, três tipos diferentes efeitos: \(\alpha\), \(\beta\) e \(\gamma\), sendo que podemos juntar os três para obter o efeito geral do tratamento: \(\beta\gamma + \alpha\).
+
+ o alpha mede o efeito do tratamento com o tempo até o evento, o beta mede o efeito do dado longitudinal com o tempo até o evento e o gamma mede o efeito do tratamentocom com o dado longitudinal. A imagem mostra essas relações, além de mostrar que a função tragetoria X(t) está relacioanda com o modelo linear para dados longitudinais.
+
+Nosso principal objetivo inferencial é estimar esses parâmetros, porque ele nos da informações importantes para a interpretação do modelo.
+-->
 
   * Três diferentes efeitos: 
   
     * \(\alpha\) é o efeito do tratamento no tempo até o evento;
     
-    * \(\beta\) é o efeito do processo longitudinal na análise de sobrevivência;
+    * \(\beta\) é o efeito do processo longitudinal;
     
     * \(\gamma\) é o efeito do tratamento no processo longitudinal.
   
@@ -153,13 +167,7 @@ knitr::include_graphics(caminho_img("figura1.png"))
 ```
 
   
-<!--
-Temos, então, três tipos diferentes efeitos: \(\alpha\), \(\beta\) e \(\gamma\), sendo que podemos juntar os três para obter o efeito geral do tratamento: \(\beta\gamma + \alpha\).
 
- o alpha mede o efeito do tratamento com o tempo até o evento, o beta mede o efeito do dado longitudinal com o tempo até o evento e o gamma mede o efeito do tratamentocom com o dado longitudinal. A imagem mostra essas relações, além de mostrar que a função tragetoria X(t) está relacioanda com o modelo linear para dados longitudinais.
-
-Nosso principal objetivo inferencial é estimar esses parâmetros, porque ele nos da informações importantes para a interpretação do modelo.
--->
 
 ## Interpretações dos efeitos
 
@@ -169,16 +177,16 @@ Nosso principal objetivo inferencial é estimar esses parâmetros, porque ele no
 
   * \(\alpha < 0\): risco de quem recebe tratamento \(Z_i = 1\) é menor de quem não recebe \(Z_i = 0\);
 
-  * \(\gamma = 0\): o tratamento não influência a mudança dos valores dos dados longitudinais.
+  * \(\gamma = 0\): o tratamento não influencia os valores dos dados longitudinais.
 
 <!--
 Portanto, falaremos a interpretação que de cada efeito traz para o modelo.
-O \(\beta = 0\) significa que os dados longitudinais não tem associação com o tempo até o evento. Quer dizer que os dados longitudinais não alteram o risco, portanto, não precisa-se de modelo conjunto neste caso. 
+O \(\beta = 0\) ou 0 estar presente no intervalo de confiança da estimativa de Beta, significa que os dados longitudinais não tem associação com o tempo até o evento. Quer dizer que os dados longitudinais não alteram a taxa de falha, portanto, não precisa-se de modelo conjunto neste caso. 
 O \(\beta = 0.5\) significa que o risco aumenta em 0.5 para cada unidade aumentada na função trajetória (X_ij) que qualquer grupo de tratamento.
 Se \(\alpha\) for negativo, o risco de quem recebe tratamento é menor de quem não recebe, portanto, há indícios de que o tratamento seja eficiente. se for positivo acontece o contrário.
-Se \(\gamma = 0\) significa que que o tratamento não influência na mudança dos valores dos dados longitudinais.
+Se \(\gamma = 0\) significa que que o tratamento não influência os valores dos dados longitudinais.
 
-Agora passaremos para o Ruy monstrar alguns exemplos que podem utilizar o modelo conjunto.
+Agora passaremos para o Ruy falar sobre os modelos que utilizamos para comparar com o modelo conjunto.
 -->
 
 # Exemplos
@@ -211,7 +219,7 @@ Agora passaremos para o Ruy monstrar alguns exemplos que podem utilizar o modelo
 
 ## QDV
 
-* Caracterização da associação entre tempo até o evento e QDV atravéz modelamento conjunto;
+* Caracterização da associação entre tempo até o evento e QDV atravéz modelagem conjunta;
 
 * Entender a troca entre QDV e sobrevivência;
 
