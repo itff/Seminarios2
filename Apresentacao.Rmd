@@ -24,10 +24,10 @@ caminho_img <- function(figura) paste0(getwd(),"/figuras/",figura)
 ```
 
 
-## Artigo
+##
 
 ```{r fig.align="center"}
-knitr::include_graphics(caminho_img("figura1.png"))
+knitr::include_graphics(caminho_img("capa_artigo.png"), auto_pdf = TRUE)
 ```
 
 <!-- Esse trabalho foi feito por mim, Ítalo, e pelo Ruy, e orientado pela Juliana. 
@@ -171,65 +171,64 @@ knitr::include_graphics(caminho_img("figura1.png"))
 
 ## Interpretações dos efeitos
 
-  * \(\beta = 0\): as observações longitudinais não têm associação com o tempo até o evento;
+  * \(\beta = 0\): as observações longitudinais não têm associação com o 
+  tempo até o evento;
 
-  * \(\beta = 0.5\): risco aumenta em 0.5 para cada unidade aumentada em \(X_{ij}\);
+  * \(\beta = 0.5\): risco aumenta em 0.5 para cada unidade aumentada em 
+  \(X_{ij}\);
 
-  * \(\alpha < 0\): risco de quem recebe tratamento \(Z_i = 1\) é menor de quem não recebe \(Z_i = 0\);
+  * \(\alpha < 0\): risco de quem recebe tratamento \(Z_i = 1\) é menor de 
+  quem não recebe \(Z_i = 0\);
 
-  * \(\gamma = 0\): o tratamento não influencia os valores dos dados longitudinais.
+  * \(\gamma = 0\): o tratamento não influencia os valores dos dados 
+  longitudinais.
 
 <!--
 Portanto, falaremos a interpretação que de cada efeito traz para o modelo.
-O \(\beta = 0\) ou 0 estar presente no intervalo de confiança da estimativa de Beta, significa que os dados longitudinais não tem associação com o tempo até o evento. Quer dizer que os dados longitudinais não alteram a taxa de falha, portanto, não precisa-se de modelo conjunto neste caso. 
-O \(\beta = 0.5\) significa que o risco aumenta em 0.5 para cada unidade aumentada na função trajetória (X_ij) que qualquer grupo de tratamento.
-Se \(\alpha\) for negativo, o risco de quem recebe tratamento é menor de quem não recebe, portanto, há indícios de que o tratamento seja eficiente. se for positivo acontece o contrário.
-Se \(\gamma = 0\) significa que que o tratamento não influência os valores dos dados longitudinais.
+O \(\beta = 0\) ou 0 estar presente no intervalo de confiança da estimativa 
+de Beta, significa que os dados longitudinais não tem associação com o tempo
+até o evento. Quer dizer que os dados longitudinais não alteram a taxa de 
+falha, portanto, não precisa-se de modelo conjunto neste caso. 
+O \(\beta = 0.5\) significa que o risco aumenta em 0.5 para cada unidade 
+aumentada na função trajetória (X_ij) que qualquer grupo de tratamento.
+Se \(\alpha\) for negativo, o risco de quem recebe tratamento é menor de quem
+não recebe, portanto, há indícios de que o tratamento seja eficiente. se for
+positivo acontece o contrário.
+Se \(\gamma = 0\) significa que que o tratamento não influência os valores
+dos dados longitudinais.
 
-Agora passaremos para o Ruy falar sobre os modelos que utilizamos para comparar com o modelo conjunto.
+Agora passaremos para o Ruy falar sobre os modelos que utilizamos para 
+comparar com o modelo conjunto.
 -->
 
 # Exemplos
 
-## Modelos
-
-  * Modelo de Cox apenas com a covariável do tratamento;
-
-  * Modelo de dois estágios com as duas medidas de QDV:
-
-    - *Tsiatis et al*, 1995;
-  
-    - Ajusta um modelo linear misto nos dados longitudinais;
-    
-    - Em seguida insere a função trajetória ajustada no modelo de Cox como variável tempo-dependente.
-
-  * Modelo conjunto para examinar o efeito do tratamento e a associação entre QDV e a sobrevivência.
-  
-  <!--
-  Um dos primeiros modelos propostos que usam um modelo linear misto para os dados longitudinais.
-  -->
-
 ## Exemplos
 
- - Qualidade-de-vida (QDV);
+* Qualidade-de-vida (QDV);
  
- - E1193;
+  * E1193; 
  
- - Simulação.
+* Simulação.
 
-## QDV
-
-* Caracterização da associação entre tempo até o evento e QDV atravéz modelagem conjunta;
-
-* Entender a troca entre QDV e sobrevivência;
-
-  * Uma certo tratamento pode prolongar a sobrevivência, mas a qualidade de vida nesse período prolongado pode ser ruim.
-
-## Análise do modelo conjunto de _E1193_
+ <!--
+ Qualidade de vida, muitas vezes, é mais importante que tempo de 
+ sobrevivência, em casos como o tratamento para câncer. Sendo
+ assim, a caracterização da associação entre tempo até o evento
+ e qualidade de vida é de grande interesse para esse tipo de testes
+ clínicos, principalmente em casos onde há um conflito entre 
+ aumento na sobrevivencia e a diminuição da qualidade de vida.
+ 
+ O modelo conjunto permite fazer a análise de toda essa informação
+ simultâneamente, o que é uma vantagem sobre os outros tipos de modelagem
+ clássicos.
+ -->
+  
+## _E1193_
 
 * Experimento em grupo E1193 - *Eastern Cooperative Oncology*;
 
-* Examinar a associação entre QDV e tempo de sobrevivência médio para pacientes no estudo;
+* Examinar a associação entre QDV e tempo de sobrevivência para pacientes no estudo;
 
 * Estudo clínico de fase III de doxorubicin, paclitaxel e uma combinação dos dois;
 
@@ -262,13 +261,14 @@ Agora passaremos para o Ruy falar sobre os modelos que utilizamos para comparar 
 
   * Quanto maior a pontuação, melhor a qualidade de vida do paciente.
 
-* Análise do tempo de:
+* Análise de:
 
-  - Sobrevivência após entrar na fase de cross-over (progressão da doença) e associação entre tratamento
+  - Tempo obrevivência após entrar na fase de cross-over (progressão da doença) 
+  e associação com o tratamento e com o QDV.
   
-  - QDV;
+* QDV;
 
-    * Medida em 2 pontos durante essa fase.
+  - Medida em 2 pontos durante essa fase.
   
 ## _E1193_
 
@@ -297,12 +297,36 @@ Agora passaremos para o Ruy falar sobre os modelos que utilizamos para comparar 
 
 * Essas escolhas foram feitas devido a confiança na habilidade do modelo conjunto em reduzir o viés proveniente de dados incompletos ou com erro.
 
+## Modelos
+
+  * Modelo de Cox apenas com a covariável do tratamento;
+
+  * Modelo de dois estágios com as duas medidas de QDV:
+
+    - *Tsiatis et al*, 1995;
+  
+    - Ajusta um modelo linear misto nos dados longitudinais;
+    
+    - Em seguida insere a função trajetória ajustada no modelo de Cox
+    como variável tempo-dependente.
+
+  * Modelo conjunto para examinar o efeito do tratamento e a associação
+  entre QDV e a sobrevivência.
+  
+  <!--
+  
+  Um dos primeiros modelos propostos que usam um modelo linear misto para
+  os dados longitudinais.
+  
+  
+  -->
+
 ## _E1193_
 
 <!--
-Figure 2 shows the linear trajectory X_ij for each subject.
-We see from this plot that these trajectories typically have a lot of noise,
-and hence treating them as random is a key part of the analysis. 
+Figura 2 mostra a trajetoria linear X_ij para cada individuo.
+Essas trajetórias tem muito ruído e, portanto, podem ser tratadas 
+aleatórias.
 -->
 
 ```{r fig.align="center"}
@@ -328,6 +352,7 @@ knitr::include_graphics(caminho_img("figura2.png"))
 * A interação entre tratamento e tempo foi testada separadamente e foi não-significativa;
 
   - Podemos assumir que \(QDV^{\frac{1}{2}}\) segue uma trajetória da forma \(\theta_{0i} + \theta_{1i}t + \gamma Tratamento\);
+  
     - No modelo de dois estágios e no modelo conjunto.
 
 
@@ -365,9 +390,22 @@ knitr::include_graphics(caminho_img("tabela1.png"))
 
 onde \(\theta_{0i} \sim N(0,1), \theta_1 \sim N(0, 0.5^2)\) e \(Cor(\theta_{0i},\theta_{1})=0.3\).
 
-* Os dados longitudinais observados foram simulados de um modelo \(Y_{i}(t_{j}) = N(X_{i}(t_{j}),\sigma_{e}^{2})\) com \(\sigma_{e}^{2}=0.5^2\);
+<!-- 
+Lembrando que:
+                gamma: efeito do tratamento no processo longitudinal.
+                beta: efeito do processo longitudinal na sobrevivência.
+                alpha: efeito do tratamento na sobrevivência.
+-->
 
-* O tempo para medidas longitudinais foi fixado em \(t_{j} = (0, 0.5, 1.0, 1.5, 2.0, 2.5)\) anos após a entrada do participante no estudo.
+##
+
+* Os dados longitudinais observados foram simulados de um modelo 
+\[Y_{i}(t_{j}) = N(X_{i}(t_{j}),\sigma_{e}^{2}),\] 
+com \(\sigma_{e}^{2}=0.5^2\);
+
+* O tempo para medidas longitudinais foi fixado em 
+\(t_{j} = (0, 0.5, 1.0, 1.5, 2.0, 2.5)\) anos após a entrada do
+participante no estudo.
 
 ## Simulação
 
@@ -405,10 +443,6 @@ com nível menor que 95% para o intervalo de confiança da probabilidade de cobe
   . Quando gamma e beta são diferentes de zero sob a hipotése nula, alpha = 0.
   . Ou quando beta é diferente de zero sob a hipótese alternativa, alpha != 0.
  
- Lembrando que:
-                gamma: efeito do tratamento no processo longitudinal.
-                beta: efeito do processo longitudinal na sobrevivência.
-                alpha: efeito do tratamento na sobrevivência.
 
 
 -->
