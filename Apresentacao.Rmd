@@ -1,13 +1,10 @@
 ---
 title: "Modelagem Conjunta de Dados Longitudinais e de Sobrevivência"
-author: 
+author:
 - Ítalo Ferreira Fernandes
 - Ruy Azevedo Cota Vasconcelos
 date: "Universidade Federal de Minas Gerais (UFMG)"
-output:
-  ioslides_presentation:
-    widescreen: true
-    smaller: true
+output: powerpoint_presentation
 ---
 
 
@@ -197,8 +194,8 @@ positivo acontece o contrário.
 Se \(\gamma = 0\) significa que que o tratamento não influência os valores
 dos dados longitudinais.
 
-Agora passaremos para o Ruy falar sobre os modelos que utilizamos para 
-comparar com o modelo conjunto.
+Agora passaremos para o Ruy falar sobre os exemplos.
+
 -->
 
 # Exemplos
