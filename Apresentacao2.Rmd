@@ -1,0 +1,483 @@
+---
+title: "Modelagem Conjunta de Dados Longitudinais e de Sobrevivência"
+author:
+- Ítalo Ferreira Fernandes
+- Ruy Azevedo Cota Vasconcelos
+date: "Universidade Federal de Minas Gerais (UFMG)"
+output: powerpoint_presentation
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r, echo=FALSE}
+library(knitr)
+```
+
+```{r, echo=FALSE}
+caminho_img <- function(figura) paste0(getwd(),"/figuras/",figura)
+```
+
+
+##
+
+```{r fig.align="center"}
+knitr::include_graphics(caminho_img("capa_artigo.png"), auto_pdf = TRUE)
+```
+
+<!-- Esse trabalho foi feito por mim, Ítalo, e pelo Ruy, e fomos orientados pela Juliana.
+Apresentaremos o artigo 'Basic Concepts and Methods for Joint Models of Longitudinal and Survival Data' de Ibrahim, chu e chen.
+-->
+
+# Introdução
+
+## Dado de tempo até o evento
+
+ * Acompanha paciente até o evento ou a censura.
+
+ * O tempo até o evento é o dado primordial da análise de sobrevivência. 
+ 
+ * Importante o tempo que levou para ocorrer o evento.
+
+ * Comparação de tratamentos.
+ 
+ * Retorna a função de riscos, a taxa de falha e risco relativo.
+
+<!--
+introduçao, primeiro falares o que é um dado de tempo até o evento.
+Nesse dado acompanhamos um paciente no tempo até a ocorencia do evento que poder como por exemplo a morte ou a censura à direita.
+
+A censura é quando o paciente sai do estudo ou o estudo termina e não temos todas informações até o evento, porque não evento ainda não ocerreu. 
+
+Esse tempo até o evento é primordial na análise de sobrevivencia, porque esses dados no modelo nos permite, comparar o tempo até o evendo de um paciente com tratamento do paciente sem tratamento ou com um tratamento diferente. O tratamento pode ser um remédio por exemplo.
+
+Portanto, o modelo consegue nos retornar a taxa de falha em cada grupo e com ela conseguimos calcular o risco relativo que compara os grupos falando qual grupo tem uma maior chance do evento ocorrer em determinado tempo. E com isso conseguimos saber se o grupo com tratamento sobrevive mais do que o sem tratamento. -->
+ 
+
+## Dado longitudinal
+
+ * Valores em diferentes pontos no tempo.
+ 
+ * Importante o valor coletado e o tempo que foi coletado.
+ 
+ * Podem ser ótimos preditores para o tempo até o evento.
+ 
+<!-- 
+Um dado pode ser considerado longitudinal quando coletamos ele em diferentes pontos no tempo. 
+
+O importante para os modelos que utilizam esses dados é o valor observado em determinado tempo e em ensaios clínicos, esses valores observados podem influenciar o dado de tempo até o evento.
+
+Um exemplo, é o dado de qualidade de vida de um paciente coletado toda semana, os valores desses dados podem estar relacionados com o dado de tempo-até-o-evento.
+-->
+
+## Modelo conjunto
+
+ * Modelos clássicos não levam em conta a dependência entre esses dois tipos de dados. 
+
+ * A modelagem conjunta foi proposta com objetivo de levar em consideração essa dependência.
+ 
+ * Estimativas mais eficientes e menos viesadas.
+
+
+<!-- Então, como os modelos classicos como o modelo linear misto para dados longitudinais e o modelo de riscos proporcionais de Cox para análise de sobrevivência não levam em conta a dependência entre essas dois tipos de dados, O artigo propõe uma modelagem conjunta para levar em conta essa dependência.
+
+O objetivo do artigo é demonstrar que, se existir uma influência do dado longitudinal no tempo-até-o-evento, essa modelagem conjunta produzira estimativas mais eficientes para o efeito do tratamento no tempo-até-o-evento e para o efeito do tratamento dos marcadores longitudinais. Além de reduzir o viés da estimativa do efeito geral do tratamento.
+
+Para demonstrar essas propriedades, mais a frente, demonstramos um exemplo e uma simulações para comparar os modelos.
+-->
+
+# Estrutura do modelo conjunto
+
+## Parte longitudinal
+
+<!--
+A estrutura do modelo conjunto incorpora o componente longitudinal na função de risco de Cox.
+Esse componente longitudinal consiste no modelo linear misto que pode ser escrito como: ...
+-->
+
+O componente longitudinal consiste no modelo linear misto, que pode ser escrito como:
+
+* $Y_{ij} = X_{ij} +\epsilon_{ij}$;
+
+  * $Y_{ij}$ é a resposta observada do i-ésimo indivíduo no j-ésimo tempo;
+  
+  * $\epsilon_{ij}$ é o erro aleatório que assumimos que vem de uma distribuição normal;
+  
+  * $X_{ij}$ é conhecida como função trajetória do modelo;
+
+## Função Trajetória
+
+<!--
+Esse função trajetória do modelo pode ser aberta como:... 
+-->
+
+* $X_{ij} = \theta_{0i} + \theta_{1i} t_{ij} +\gamma Z_i$;
+ 
+  * $t_{ij}$ é o valor do tempo;
+
+  * $Z_i$ é o indicador de tratamento do i-ésimo indivíduo que assume 1 para tratamento e 0 para não tratamento ou tratamento base;
+  
+  * $\theta_{0i}$ e $\theta_{1i}$ são parâmetros que assumimos como aleatório e com distribuição normal multivariada.
+  
+  * $\gamma$ indica o efeito do tratamento no processo longitudinal.
+
+
+## Modelo Conjunto
+
+<!--
+Para fazer o modelo conjunto, adicionamos a função trajetória do componente longitudinal a função de riscos do componente de sobrevivência. Portanto, o modelo conjunto é escrito desse forma: ...
+-->
+
+Função de risco do modelo de sobrevivência com o componente longitudinal:
+
+  * \(h(t) = h_o(t)exp(\beta X_{ij}+\alpha Z_i)\);
+    
+    * \(h(t)\) é a taxa instantânea de ocorrência do evento (função de risco);
+    
+    * \(h_o(t)\) é a função de risco de base.
+    
+    * \(\alpha\) é o efeito do tratamento no tempo até o evento;
+  
+    * \(\beta\) é o efeito do processo longitudinal.
+
+## Efeitos
+<!--
+Temos, então, três tipos diferentes efeitos: \(\alpha\), \(\beta\) e \(\gamma\), sendo que podemos juntar os três para obter o efeito geral do tratamento: \(\beta\gamma + \alpha\).
+
+ o alpha mede o efeito do tratamento com o tempo até o evento, o beta mede o efeito do dado longitudinal com o tempo até o evento e o gamma mede o efeito do tratamento com com o dado longitudinal. A imagem mostra essas relações, além de mostrar que a função tragetoria X(t) está relacioanda com o modelo linear para dados longitudinais.
+
+Nosso principal objetivo inferencial é estimar esses parâmetros, porque ele nos da informações importantes para a interpretação do modelo.
+-->
+
+  * Três diferentes efeitos: 
+  
+    * \(\alpha\) é o efeito do tratamento no tempo até o evento;
+    
+    * \(\beta\) é o efeito do processo longitudinal;
+    
+    * \(\gamma\) é o efeito do tratamento no processo longitudinal.
+  
+  * Efeito geral do tratamento: 
+  
+    * \(\beta\gamma + \alpha\).
+
+
+```{r fig.align="center"}
+knitr::include_graphics(caminho_img("figura1.png"))
+```
+
+  
+
+
+## Interpretações dos efeitos
+
+  * \(\beta = 0\): as observações longitudinais não têm associação com o 
+  tempo até o evento;
+
+  * \(\beta = 0.5\): risco aumenta em 0.5 para cada unidade aumentada em 
+  \(X_{ij}\);
+
+  * \(\alpha < 0\): risco de quem recebe tratamento \(Z_i = 1\) é menor de 
+  quem não recebe \(Z_i = 0\);
+
+  * \(\gamma = 0\): o tratamento não influencia os valores dos dados 
+  longitudinais.
+
+<!--
+Portanto, falaremos a interpretação que de cada efeito traz para o modelo nesses exemplos:
+O \(\beta = 0\) significa que os dados longitudinais não tem associação com o tempo
+até o evento. Quer dizer que os dados longitudinais não alteram a taxa de 
+falha, portanto, não precisa-se de modelo conjunto neste caso. 
+Dando um exemplo com \(\beta = 0.5\), significa que o risco aumenta em 0.5 para cada unidade 
+aumentada na função trajetória (X_ij) que qualquer grupo de tratamento. Se for negativo esse risco diminui.
+Se \(\alpha\) for negativo, o risco de quem recebe tratamento é menor de quem
+não recebe, portanto, há indícios de que o tratamento seja eficiente. se for
+positivo acontece o contrário.
+Se \(\gamma = 0\) significa que que o tratamento não influência os valores
+dos dados longitudinais.
+
+Agora passaremos para o Ruy falar sobre os exemplos.
+
+-->
+
+# Exemplos
+
+## Exemplos
+
+* Qualidade-de-vida (QDV);
+ 
+  * E1193; 
+ 
+* Simulação.
+
+ <!--
+ Qualidade de vida, muitas vezes, é mais importante que tempo de 
+ sobrevivência, em casos como o tratamento para câncer. Sendo
+ assim, a caracterização da associação entre tempo até o evento
+ e qualidade de vida é de grande interesse para esse tipo de testes
+ clínicos, principalmente em casos onde há um conflito entre 
+ aumento na sobrevivencia e a diminuição da qualidade de vida.
+ 
+ O modelo conjunto permite fazer a análise de toda essa informação
+ simultâneamente, o que é uma vantagem sobre os outros tipos de modelagem
+ clássicos.
+ -->
+  
+## _E1193_
+
+* Experimento em grupo E1193 - *Eastern Cooperative Oncology*;
+
+* Examinar a associação entre QDV e tempo de sobrevivência para pacientes no estudo;
+
+* Estudo clínico de fase III de doxorubicin, paclitaxel e uma combinação dos dois;
+
+  - Quimioterapia contra câncer de mama metastático.
+
+## _E1193_
+
+* Pacientes que recebiam um dos dois tratamentos "simples" - doxorubicin ou paclitaxel apenas - trocaram para o outro agente durante o estudo;
+
+* QDV foi acessada por uma escala de avaliação de terapia de câncer de mama (*Brady et al*, 1997);
+
+  * Essa avaliação inclui cinco subescalas gerais:
+  
+    - Física;
+    
+    - Social;
+    
+    - Relacionamento com o médico;
+    
+    - Emociona;
+    
+    - Funcional.
+    
+
+  * Além de subescalas específicas para câncer de mama.
+
+## _E1193_
+
+* Pontuação máxima de 148 pontos;
+
+  * Quanto maior a pontuação, melhor a qualidade de vida do paciente.
+
+* Análise de:
+
+  - Tempo obrevivência após entrar na fase de cross-over (progressão da doença) 
+  e associação com o tratamento e com o QDV.
+  
+* QDV;
+
+  - Medida em 2 pontos durante essa fase.
+  
+## _E1193_
+
+* 252 pacientes tiveram pelo menos uma medição de QDV realizada.
+
+* 124 pacientes: paclitaxel \(\rightarrow\) doxorubicin;
+
+  * Tempo de vida mediano: 13 meses;
+  
+  * 2 censuras.
+
+* 128 pacientes: doxorubicin \(\rightarrow\) paclitaxel;
+
+  * Tempo de vida mediano: 14.9 meses;
+  
+  * 6 censuras.
+  
+  
+## _E1193_
+
+* Contudo, apenas 65% dos pacientes tiveram 2 medições de QDV realizadas;
+
+  * Esses dados faltantes podem introduzir viés na estimativa do efeito de QDV e do tratamento.
+  
+* Dados discrepantes não foram excluídos;
+
+* Essas escolhas foram feitas devido a confiança na habilidade do modelo conjunto em reduzir o viés proveniente de dados incompletos ou com erro.
+
+## Modelos
+
+  * Modelo de Cox apenas com a covariável do tratamento;
+
+  * Modelo de dois estágios com as duas medidas de QDV:
+
+    - *Tsiatis et al*, 1995;
+  
+    - Ajusta um modelo linear misto nos dados longitudinais;
+    
+    - Em seguida insere a função trajetória ajustada no modelo de Cox
+    como variável tempo-dependente.
+
+  * Modelo conjunto para examinar o efeito do tratamento e a associação
+  entre QDV e a sobrevivência.
+  
+  <!--
+  
+  Um dos primeiros modelos propostos que usam um modelo linear misto para
+  os dados longitudinais.
+  
+  
+  -->
+
+## _E1193_
+
+<!--
+Figura 2 mostra a trajetoria linear X_ij para cada individuo.
+Essas trajetórias tem muito ruído e, portanto, podem ser tratadas 
+aleatórias.
+-->
+
+```{r fig.align="center"}
+knitr::include_graphics(caminho_img("figura2.png"))
+```
+
+## _E1193_
+
+* Função de trajetória;
+
+  - Muito ruído;
+  
+  - Tratar como aleatórias.
+
+## _E1193_: Suposições
+
+* A trajetória de QDV é uma função linear do tempo;
+  
+  - Já que temos apenas 2 medidas de QDV.
+  
+* A transformação \(QDV^{\frac{1}{2}}\) é normal.
+
+* A interação entre tratamento e tempo foi testada separadamente e foi não-significativa;
+
+  - Podemos assumir que \(QDV^{\frac{1}{2}}\) segue uma trajetória da forma \(\theta_{0i} + \theta_{1i}t + \gamma Tratamento\);
+  
+    - No modelo de dois estágios e no modelo conjunto.
+
+
+## _E1193_: Resultados
+
+<!--
+Na tabela 1, vemos que:
+
+O efeito do tratamento estimado é -0.251 (equivalente a uma taxa de falhas de 0.779) no modelo de Cox sem os dados de QDV.
+
+O efeito do tratamento estimado é de -0.261 (taxa de falhas de 0.771) no modelo de 2 estágios e -0.277 (taxa de falhas de 0.756) no modelo conjunto
+
+Esses resultados são consistentes com outros estudo de simulação realizados pelos autores. 
+
+A abordagem de modelagem conjunta dá estimativas maiores e sem viés do efeito do tratamento quando os dados longitudinais estão associados com a sobrevivência.
+
+As estimativas de beta no modelo de 2 estágios e no modelo conjunto são consistentes com as conclusões de Wulfsohn and Tsiatis, onde foram relatados um beta_hat e SE ligeiramente maiores no modelo conjunto quando comparados com os obtidos no modelo de 2 estágios.
+
+Para os dados do experimento E1193, beta_hat = -0.277 (SE = 0.071) no modelo de 2 estágios e beta_hat = -0.445 (SE = 0.118) no modelo conjunto.
+-->
+
+```{r fig.align="center"}
+knitr::include_graphics(caminho_img("tabela1.png"))
+```
+
+## Simulação
+
+* 12 conjuntos de estudos de simulação com diferentes valores de \(\alpha = (0, 0.5)\), \(\beta = (0, 0.25, 0.5)\) e \(\gamma = (0, 0.5)\);
+
+* Para cada combinação de parâmetros foram usadas 1000 réplicas;
+
+  - Para cada réplica forama gerados 400 indivíduos - 200 no grupo controle e 200 no tratamento.
+  
+* A trajetória longitudinal verdadeira foi simulada como: \[X_{ij} = \theta_{0i} + \theta_{1i} \times t_{ij} + \gamma Z_{i},\]
+
+onde \(\theta_{0i} \sim N(0,1), \theta_1 \sim N(0, 0.5^2)\) e \(Cor(\theta_{0i},\theta_{1})=0.3\).
+
+<!-- 
+Lembrando que:
+                gamma: efeito do tratamento no processo longitudinal.
+                beta: efeito do processo longitudinal na sobrevivência.
+                alpha: efeito do tratamento na sobrevivência.
+-->
+
+##
+
+* Os dados longitudinais observados foram simulados de um modelo 
+\[Y_{i}(t_{j}) = N(X_{i}(t_{j}),\sigma_{e}^{2}),\] 
+com \(\sigma_{e}^{2}=0.5^2\);
+
+* O tempo para medidas longitudinais foi fixado em 
+\(t_{j} = (0, 0.5, 1.0, 1.5, 2.0, 2.5)\) anos após a entrada do
+participante no estudo.
+
+## Simulação
+
+* O tempo de sobrevivência é gerado pela equação: \[h(t) = h_o(t)exp(\beta X_{ij}+\alpha Z_i),\] com \(\lambda(t)=0.25\) 
+  
+  - Tempo mediano de sobrevivência = 2.77 anos.
+  
+* Suposição de censura à direita uniforme;
+  
+  - Tempo de _follow-up_ mínimo de 1 ano.
+  
+## Simulação
+
+  * Ajustaram 3 modelos:
+    
+    - **A**: Modelo de Cox sem trajetória longitudinal;
+    
+    - **B**: Modelo de Cox usando dado longitudinal como variável tempo-dependente;
+    
+    - **C**: Modelo conjunto.
+
+## Simulação
+
+```{r fig.align="center"}
+knitr::include_graphics(caminho_img("tabela2.png"))
+```
+
+<!--
+
+Na tabela 2 são apresentados o viés, erro padrão, intervalo de confiança 95% das probabilidades de cobertura e taxa de erros tipo I e II para a estimativa do efeito do tratamento na sobrevivência - alpha -, para cada uma das 3 abordagens.
+
+- Ignorar o processo longitudinal pode resultar em viés na estimativa do efeito do tratamento na sobrevivência,
+com nível menor que 95% para o intervalo de confiança da probabilidade de cobertura.
+
+  . Quando gamma e beta são diferentes de zero sob a hipotése nula, alpha = 0.
+  . Ou quando beta é diferente de zero sob a hipótese alternativa, alpha != 0.
+ 
+
+
+-->
+
+
+## Simulação
+
+```{r fig.align="center"}
+knitr::include_graphics(caminho_img("tabela3.png"))
+```
+
+<!--
+
+Na tabela 3 são apresentados o viés, erro padrão, intervalo de confiança 95% das probabilidades de cobertura e taxa de erros tipo I e II para a estimativa do efeito do processo longitudinal na sobrevivência - beta -, para os modelos B e C.
+
+- A abordagem B dá estimativas enviesadas de beta e cobertura menor que a nominal de 95% quando beta != 0
+
+- SE padrão médio modelo B: 0.053; C: 0.042.
+-->
+
+## Discussões
+
+* Quando os dados longitudinais não estão associados ao tratamento \(\gamma = 0\), ignorar a informação longitudinal ainda resultará em estimativas atenuadas do efeito do tratamento;
+
+  - O grau de atenuação depende do grau de associação entre os dados longitudinais e os dados de sobrevivência, \(\beta\);
+  
+* A estimativa do efeito do tratamento se mantém sem viés quando não há associação entre os dados longitudinais e de sobrevivência;
+
+* O uso do modelo conjunto no modelamento implica em correção do viés e aumento do poder para estimar o efeito direto do tratamento, \(\alpha\), e o efeito geral do tratamento: \(\beta \gamma + \alpha\).
+
+## Discussões
+
+* Quando o propósito do estudo clínico é investigar o efeito longitudinal no tempo até o evento de interesse, o modelo conjunto leva a estimativas mais eficientes e sem viés quando é ajustado o modelo de sobrevivência correto.
+
+## Referência
+
+  * Joseph G. Ibrahim, Haitao Chu and Liddy M. Chen, *Basic Concepts and Methods for Joint Models of Longitudinal and Survival Data*, Journal of Clinical Oncology, 28, 16, (2796), (2010).
